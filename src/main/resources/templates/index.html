@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon YouTube Scraper</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .neon-bg {
+            background: linear-gradient(135deg, #ffffff, #f5f7fa);
+        }
+        .neon-card {
+            background: white;
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(224, 231, 255, 0.8);
+        }
+        .neon-input {
+            background: white;
+            border: 2px solid #e0e7ff;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .neon-input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+            outline: none;
+        }
+        .neon-btn {
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .neon-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+        }
+        .neon-btn:active {
+            transform: translateY(0);
+        }
+        .neon-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255,255,255,0.2) 0%,
+                rgba(255,255,255,0) 60%
+            );
+            transform: rotate(30deg);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .neon-btn:hover::after {
+            left: 100%;
+        }
+        .youtube-icon {
+            filter: drop-shadow(0 2px 4px rgba(239, 68, 68, 0.3));
+        }
+        .pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body class="neon-bg min-h-screen flex items-center justify-center p-4 font-sans">
+    <div class="neon-card p-10 rounded-2xl max-w-md w-full">
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-red-50 to-white mb-6 youtube-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="#ef4444">
+                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                </svg>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">
+                YouTube <span class="text-indigo-600">Scraper</span>
+            </h1>
+            <p class="text-gray-500">Extract video data in seconds with our lightning-fast tool</p>
+        </div>
+
+        <form th:action="@{/processing}" method="post" class="space-y-6">
+            <div class="space-y-2">
+                <label for="videoLink" class="block text-sm font-medium text-gray-700">
+                    YouTube Video URL
+                </label>
+                <input type="text" 
+                       id="videoLink" 
+                       name="videoLink" 
+                       required
+                       placeholder="https://www.youtube.com/watch?v=..."
+                       class="neon-input w-full px-5 py-3 rounded-lg text-gray-800 placeholder-gray-400">
+            </div>
+
+            <button type="submit"
+                    class="neon-btn w-full py-3 rounded-lg font-medium flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                Scrape Video Data
+                <span class="ml-2 pulse">↓</span>
+            </button>
+        </form>
+
+        <div class="mt-8 text-center text-sm text-gray-400">
+            <p>Supports all public YouTube videos and playlists</p>
+        </div>
+    </div>
+</body>
+</html>

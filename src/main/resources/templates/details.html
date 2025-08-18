@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <title>YouTube Video Details</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #FF5733, #FFBD33, #75FF33, #33FFBD, #335BFF, #8A33FF);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: #FFFFFF;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .details-bg {
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+        }
+    </style>
+</head>
+<body>
+    <div class="max-w-4xl mx-auto p-6 details-bg rounded-lg shadow-lg">
+        <div class="text-center text-4xl font-bold mb-4 text-yellow-300">
+            <span>YouTube Video Details</span>
+        </div>
+        <a th:href="@{/}" class="text-blue-300 hover:bg-blue-600 hover:text-white transition duration-300 rounded px-2 py-1 mb-4 inline-block">Search Next Video Details</a>
+        <hr class="border-gray-400 mb-4">
+
+        <div class="mb-4">
+            <label for="title" class="text-2xl text-green-400 font-bold">Title:</label>
+            <span th:text="${vtitle}" class="text-xl font-medium block mt-1"></span>
+        </div>
+
+        <div class="mb-4">
+            <label for="thumbnail"  class="text-gray-300 font-bold">Thumbnail:</label>
+            <img th:src="${vthumb}" alt="Video Thumbnail" class="max-w-full h-auto rounded-lg shadow-md mt-1">
+        </div>
+
+        <div class="mb-4">
+            <label for="tags" class="text-gray-300 font-bold">Tags:</label>
+            <span th:each="tag : ${vtags}" th:text="${tag} + ','" class="font-bold"></span>
+        </div>
+
+        <div class="mb-4">
+            <label for="description" class="text-2xl text-green-400 font-bold">Description:</label>
+            <p th:text="${vdescr}" class="mt-1"></p> 
+        </div>
+    </div>
+</body>
+</html>
