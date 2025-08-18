@@ -9,6 +9,6 @@ import lombok.Data;
 public class YtConfig {
     
     private String apiUrl = "https://www.googleapis.com/youtube/v3/videos";
-    private String apiKey = "AIzaSyBY1H-0saglrxL3KkDt9ZKoer_A1wuWE24";
+    private String apiKey = "{Add Your API Key Here}";
 
 }
